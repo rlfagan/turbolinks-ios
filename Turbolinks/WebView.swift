@@ -1,7 +1,7 @@
 import WebKit
 
 protocol WebViewDelegate: class {
-    func webView(webView: WebView, didProposeVisitToLocation location: NSURL, withAction action: Action)
+    func webView(webView: WebView, didProposeVisitToLocation location: NSURL, withAction action: Action?)
     func webViewDidInvalidatePage(webView: WebView)
     func webView(webView: WebView, didFailJavaScriptEvaluationWithError error: NSError)
 }

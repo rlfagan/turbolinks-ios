@@ -29,17 +29,16 @@ class ApplicationController: UINavigationController {
         presentVisitableForSession(session, URL: URL)
     }
 
-    private func presentVisitableForSession(session: Session, URL: NSURL, action: Action = .Advance) {
-        let visitable = DemoViewController(URL: URL)
-
-        if action == .Advance {
-            pushViewController(visitable, animated: true)
-        } else if action == .Replace {
-            popViewControllerAnimated(false)
-            pushViewController(visitable, animated: false)
-        }
+    private func presentVisitableForSession(session: Session, URL: NSURL, action: Action? = .Advance) {
+      let visitable = DemoViewController(URL: URL)
+      if action == nil || action == .Advance {
+        pushViewController(visitable, animated: true)
+      } else if action == .Replace {
+        popViewControllerAnimated(false)
+        pushViewController(visitable, animated: false)
+      }
         
-        session.visit(visitable)
+      session.visit(visitable)
     }
 
     private func presentNumbersViewController() {

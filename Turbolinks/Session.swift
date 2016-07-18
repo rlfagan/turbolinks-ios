@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 public protocol SessionDelegate: class {
-    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action)
+    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action?)
     func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError)
     func session(session: Session, openExternalURL URL: NSURL)
     func sessionDidLoadWebView(session: Session)
@@ -247,7 +247,7 @@ extension Session: VisitableDelegate {
 }
 
 extension Session: WebViewDelegate {
-    func webView(webView: WebView, didProposeVisitToLocation location: NSURL, withAction action: Action) {
+    func webView(webView: WebView, didProposeVisitToLocation location: NSURL, withAction action: Action?) {
         delegate?.session(self, didProposeVisitToURL: location, withAction: action)
     }
     
@@ -291,11 +291,21 @@ extension Session: WKNavigationDelegate {
         var externallyOpenableURL: NSURL? {
             if let URL = navigationAction.request.URL where shouldOpenURLExternally {
                 return URL
+            } else if let URL = navigationAction.request.URL where isPDF {
+                return URL
             } else {
                 return nil
             }
         }
-
+      
+        var isPDF: Bool {
+          let url = navigationAction.request.URL
+          if ((url?.absoluteString.containsString(".pdf")) != nil) {
+            return true
+          } else {
+            return false
+          }
+        }
         var shouldOpenURLExternally: Bool {
             let type = navigationAction.navigationType
             return isMainFrameNavigation && (type == .LinkActivated || type == .Other)
