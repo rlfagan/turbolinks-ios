@@ -120,7 +120,7 @@ extension WebView: WKScriptMessageHandler {
         case .PageInvalidated:
             delegate?.webViewDidInvalidatePage(self)
         case .VisitProposed:
-            delegate?.webView(self, didProposeVisitToLocation: message.location!, withAction: message.action!)
+            delegate?.webView(self, didProposeVisitToLocation: message.location!, withAction: message.action)
         case .VisitStarted:
             visitDelegate?.webView(self, didStartVisitWithIdentifier: message.identifier!, hasCachedSnapshot: message.data["hasCachedSnapshot"] as! Bool)
         case .VisitRequestStarted:
