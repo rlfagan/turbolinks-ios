@@ -302,8 +302,8 @@ extension Session: WKNavigationDelegate {
       
         var isPDF: Bool {
           let url = navigationAction.request.URL
-          if ((url?.absoluteString.containsString(".pdf")) != nil) {
-            return true
+          if let doesContainString = url?.absoluteString.containsString(".pdf") {
+            return doesContainString
           } else {
             return false
           }
@@ -311,12 +311,11 @@ extension Session: WKNavigationDelegate {
       
         var isModal: Bool {
           let url = navigationAction.request.URL
-          if ((url?.absoluteString.containsString("#modal")) != nil) {
-            return true
+          if let doesContainString = url?.absoluteString.containsString("#modal") {
+            return doesContainString
           } else {
             return false
           }
-
         }
       
         var shouldOpenURLExternally: Bool {
