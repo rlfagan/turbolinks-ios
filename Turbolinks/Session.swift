@@ -289,13 +289,15 @@ extension Session: WKNavigationDelegate {
         }
 
         var externallyOpenableURL: NSURL? {
-            if let URL = navigationAction.request.URL where shouldOpenURLExternally {
-                return URL
-            } else if let URL = navigationAction.request.URL where isPDF {
-                return URL
-            } else {
-                return nil
-            }
+          if isModal {
+            return nil
+          } else if let URL = navigationAction.request.URL where shouldOpenURLExternally {
+            return URL
+          } else if let URL = navigationAction.request.URL where isPDF {
+            return URL
+          } else {
+            return nil
+          }
         }
       
         var isPDF: Bool {
@@ -306,6 +308,17 @@ extension Session: WKNavigationDelegate {
             return false
           }
         }
+      
+        var isModal: Bool {
+          let url = navigationAction.request.URL
+          if ((url?.absoluteString.containsString("#modal")) != nil) {
+            return true
+          } else {
+            return false
+          }
+
+        }
+      
         var shouldOpenURLExternally: Bool {
             let type = navigationAction.navigationType
             return isMainFrameNavigation && (type == .LinkActivated || type == .Other)
