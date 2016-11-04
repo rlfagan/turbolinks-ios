@@ -128,7 +128,7 @@ public class VisitableView: UIView {
         if let webView = self.webView where !isShowingScreenshot {
             screenshotView?.removeFromSuperview()
             
-            let screenshot = webView.snapshotViewAfterScreenUpdates(false)
+          if let screenshot = webView.snapshotViewAfterScreenUpdates(false){
             screenshot.translatesAutoresizingMaskIntoConstraints = false
             screenshotContainerView.addSubview(screenshot)
 
@@ -140,6 +140,7 @@ public class VisitableView: UIView {
                 ])
 
             screenshotView = screenshot
+          }
         }
     }
     

@@ -198,7 +198,7 @@ extension Session: VisitDelegate {
 
 extension Session: VisitableDelegate {
     public func visitableViewWillAppear(visitable: Visitable) {
-        guard let topmostVisit = self.topmostVisit, currentVisit = self.currentVisit else { return }
+        guard let topmostVisit = self.topmostVisit, let currentVisit = self.currentVisit else { return }
 
         if visitable === topmostVisit.visitable && visitable.visitableViewController.isMovingToParentViewController() {
             // Back swipe gesture canceled
@@ -223,7 +223,7 @@ extension Session: VisitableDelegate {
             if currentVisit.state != .Failed {
                 activateVisitable(visitable)
             }
-        } else if let topmostVisit = self.topmostVisit where visitable === topmostVisit.visitable && topmostVisit.state == .Completed {
+        } else if let topmostVisit = self.topmostVisit  where visitable === topmostVisit.visitable && topmostVisit.state == .Completed {
             // Reappearing after canceled navigation
             visitable.hideVisitableScreenshot()
             visitable.hideVisitableActivityIndicator()
@@ -300,7 +300,7 @@ extension Session: WKNavigationDelegate {
       
         var isPDF: Bool {
           let url = navigationAction.request.URL
-          if let doesContainString = url?.absoluteString.containsString(".pdf") {
+          if let doesContainString = url?.absoluteString!.containsString(".pdf") {
             return doesContainString
           } else {
             return false
@@ -309,7 +309,7 @@ extension Session: WKNavigationDelegate {
       
         var isModal: Bool {
           let url = navigationAction.request.URL
-          if let doesContainString = url?.absoluteString.containsString("#modal") {
+          if let doesContainString = url?.absoluteString!.containsString("#modal") {
             return doesContainString
           } else {
             return false
