@@ -291,9 +291,7 @@ extension Session: WKNavigationDelegate {
         var externallyOpenableURL: NSURL? {
           if isModal {
             return nil
-          } else if let URL = navigationAction.request.URL where shouldOpenURLExternally {
-            return URL
-          } else if let URL = navigationAction.request.URL where isPDF {
+          } else if let URL = navigationAction.request.URL where shouldOpenURLExternally || isPDF {
             return URL
           } else {
             return nil
