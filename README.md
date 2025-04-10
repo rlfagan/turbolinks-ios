@@ -49,6 +49,7 @@ To run the demo, clone this repository to your computer and change into its dire
 Once you’ve started the demo server, explore the demo application in the Simulator by opening `turbolinks-ios.xcworkspace` and running the TurbolinksDemo target.
 
 ![Turbolinks for iOS demo application](https://s3.amazonaws.com/turbolinks-docs/images/ios-demo.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frlfagan%2Fturbolinks-ios.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frlfagan%2Fturbolinks-ios?ref=badge_shield)
 
 ## Getting Started
 
@@ -306,3 +307,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 ---
 
 © 2016 Basecamp, LLC
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frlfagan%2Fturbolinks-ios.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frlfagan%2Fturbolinks-ios?ref=badge_large)
